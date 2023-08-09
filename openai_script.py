@@ -1,9 +1,9 @@
 import os
 import openai
-openai.api_type = ""
-openai.api_base = ""
-openai.api_version = ""
-openai.api_key = ""
+openai.api_type = "azure"
+openai.api_base = os.getenv("API_BASE")
+openai.api_version = "2023-03-15-preview"
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # read the file question.txt from the local directory
 file = open("question.txt", "r")
@@ -14,7 +14,7 @@ file.close()
 file = open("response.txt", "w")
 for line in text.splitlines():
   response = openai.ChatCompletion.create(
-  engine="gpt-3.5-turbo	",
+  engine="", # put your engine here
   messages = [{"role": "system", "content": "You are a helpful assistant that help me"}, 
     {"role": "user", "content": line}],
   temperature=0)
